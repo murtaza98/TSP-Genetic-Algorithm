@@ -32,9 +32,18 @@ function nextGeneration(){
 	for(var i = 0; i < population.length; i++){
 		var order1 = pickOne(population, fitness);
 		var order2 = pickOne(population, fitness);
-		var order = crossOver(order1, order2);
-		mutate(order, 0.01);
-		newPopulation[i] = order;
+		var child1 = crossOver(order1, order2);
+		var child2 = crossOver(order1, order2);
+		console.log("Parent 1 selected ---- " + order1);
+		console.log("Parent 2 selected ---- " + order2);
+		console.log("After crossOver child1 ---- " + child1);
+		console.log("After crossOver child2 ---- " + child2);
+		mutate(child1, 0.5);
+		mutate(child2, 0.5);
+		console.log("After Mutation child1 ---- " + child1);
+		console.log("After Mutation child2 ---- " + child2);
+		newPopulation.push(child1);
+		newPopulation.push(child2);
 	}
 	population = newPopulation;
 }

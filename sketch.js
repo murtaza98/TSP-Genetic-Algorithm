@@ -1,5 +1,5 @@
 var cities = [];
-var totalCities = 15;
+var totalCities = 7;
 
 var order = [];
 
@@ -27,7 +27,7 @@ function setup() {
     order[i] = i;
   }
 
-  var total_initial_population = 100;
+  var total_initial_population = 5;
 
   for(var i = 0; i < total_initial_population; i++){
     var new_pop = [];
@@ -52,6 +52,11 @@ function setup() {
   	}
   }
 
+  console.log("Initial Population");
+  for(var i = 0;i< population.length; i++){
+    console.log(population[i]);
+  }
+
   // set generation count
   generation_count_point.push(device_width/2);
   generation_count_point.push(50);
@@ -71,6 +76,10 @@ function draw() {
   text('Best Path Found till Now', 10, 50);
   text('Paths being Explored', 10, 310);
   text('Generation ' + generation_count++, generation_count_point[0], generation_count_point[1]);
+
+  if(generation_count > 3){
+    noLoop();
+  }
 
   fill(255);
   for (var i = 0; i < cities.length; i++) {
