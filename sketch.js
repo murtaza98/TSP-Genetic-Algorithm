@@ -1,5 +1,5 @@
 var cities = [];
-var totalCities = 10;
+var totalCities = 15;
 
 var order = [];
 
@@ -15,7 +15,7 @@ function setup() {
 
 	var device_height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 	
-  createCanvas(device_width / 2, device_height);
+  createCanvas(device_width , device_height);
 
   var order = [];
   for (var i = 0; i < totalCities; i++) {
@@ -24,9 +24,23 @@ function setup() {
     order[i] = i;
   }
 
-  var total_initial_population = 500;
+  var total_initial_population = 100;
+
+  console.log(order);
   for(var i = 0; i < total_initial_population; i++){
-  	population[i] = shuffle(order);
+    var new_pop = [];
+    // add start
+    new_pop.push(order[0]);
+
+    // shuffle and then add middle part
+    new_pop = new_pop.concat(shuffle(order.slice(1, order.length - 1)));
+
+    // add end
+    new_pop.push(order[order.length - 1]);
+
+    console.log(new_pop);
+
+  	population[i] = new_pop.slice();
   }
 
   for(var i = 0; i < population.length; i++){
@@ -37,6 +51,7 @@ function setup() {
   		bestEver = population[i];
   	}
   }
+  frameRate(5);
 }
 
 function draw() {
@@ -48,6 +63,9 @@ function draw() {
   normalizeFitness();
   nextGeneration();
 
+  textSize(32);
+  text('Best Path Found till Now', 10, 50);
+  text('Paths being Explored', 10, 310)
 
   fill(255);
   for (var i = 0; i < cities.length; i++) {

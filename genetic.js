@@ -43,16 +43,41 @@ function crossOver(order1, order2){
 	// basic logic --  first select a random part from order1 and then add it to newOrder
 	// then loop through order2 and add the remaining left orders.
 
-	var start = floor(random(order1.length));
-	var end = floor(random(start + 1, order2.length));
 
-	var newOrder = order1.slice(start, end);
+	// var start = floor(random(order1.length - 3)) + 1;
+	// var end = floor(random(start, order2.length - 2));
 
-	for(var i = 0; i < order2.length; i++){
+
+	var newOrder = [];
+
+	// add start
+	newOrder.push(order1[0]);
+
+
+	// add order1
+	var start = floor(random(1, order1.length - 2));
+	var end = floor(random(start + 1, order1.length - 1));
+	newOrder = newOrder.concat(order1.slice(start, end));
+
+	// add order2
+	for(var i = 1; i < order2.length - 1; i++){
 		if(!newOrder.includes(order2[i])){
 			newOrder.push(order2[i]);
 		}
 	}
+
+	// add end
+	newOrder.push(order1[order1.length-1]);
+
+
+
+	// var newOrder = order1.slice(start, end);
+
+	// for(var i = 0; i < order2.length; i++){
+	// 	if(!newOrder.includes(order2[i])){
+	// 		newOrder.push(order2[i]);
+	// 	}
+	// }
 
 	return newOrder;
 }
@@ -64,7 +89,9 @@ function mutate(order, mutationRate){
 		if(random(1) < mutationRate){
 			var indexA = floor(random(order.length));
 			var indexB = (indexA + 1) % totalCities;
-			swap(order, indexA, indexB);
+			if(indexA != 0 && indexA != totalCities - 1 && indexB != 0 && indexB != totalCities - 1){
+				swap(order, indexA, indexB);
+			}
 		}
 	}
 }
