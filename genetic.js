@@ -74,6 +74,7 @@ function mutate(order, mutationRate){
 		if(random(1) < mutationRate){
 			var indexA = floor(random(order.length));
 			var indexB = (indexA + 1) % totalCities;
+			// check whether both index are not 1st and last
 			if(indexA != 0 && indexA != totalCities - 1 && indexB != 0 && indexB != totalCities - 1){
 				swap(order, indexA, indexB);
 			}

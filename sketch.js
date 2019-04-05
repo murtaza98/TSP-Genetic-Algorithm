@@ -10,6 +10,9 @@ var currentBest;
 var recordDistance = Infinity;
 var bestEver;
 
+var generation_count = 0;
+var generation_count_point = [];
+
 function setup() {
 	var device_width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
@@ -26,7 +29,6 @@ function setup() {
 
   var total_initial_population = 100;
 
-  console.log(order);
   for(var i = 0; i < total_initial_population; i++){
     var new_pop = [];
     // add start
@@ -37,8 +39,6 @@ function setup() {
 
     // add end
     new_pop.push(order[order.length - 1]);
-
-    console.log(new_pop);
 
   	population[i] = new_pop.slice();
   }
@@ -51,6 +51,10 @@ function setup() {
   		bestEver = population[i];
   	}
   }
+
+  // set generation count
+  generation_count_point.push(device_width/2);
+  generation_count_point.push(50);
   frameRate(5);
 }
 
@@ -65,7 +69,8 @@ function draw() {
 
   textSize(32);
   text('Best Path Found till Now', 10, 50);
-  text('Paths being Explored', 10, 310)
+  text('Paths being Explored', 10, 310);
+  text('Generation ' + generation_count++, generation_count_point[0], generation_count_point[1]);
 
   fill(255);
   for (var i = 0; i < cities.length; i++) {
@@ -97,39 +102,6 @@ function draw() {
   	vertex(cities[n].x, cities[n].y);
   }
   endShape();
-
-
-  // translate(0, height / 2);
-  // stroke(255);
-  // strokeWeight(1);
-  // noFill();
-  // beginShape();
-  // for (var i = 0; i < order.length; i++) {
-  //   var n = order[i];
-  //   vertex(cities[n].x, cities[n].y);
-  // }
-  // endShape();
-
-
-
-  // var d = calcDistance(cities, order);
-  // if (d < recordDistance) {
-  //   recordDistance = d;
-  //   bestEver = order.slice();
-  // }
-
-  // textSize(32);
-  // // var s = '';
-  // // for (var i = 0; i < order.length; i++) {
-  // //   s += order[i];
-  // // }
-  // fill(255);
-  // var percent = 100 * (count / totalPermutations);
-  // text(nf(percent, 0, 2) + "% completed", 20, height / 2 - 50);
-
-  // nextOrder();
-
-
 }
 
 function swap(a, i, j) {
