@@ -43,11 +43,6 @@ function crossOver(order1, order2){
 	// basic logic --  first select a random part from order1 and then add it to newOrder
 	// then loop through order2 and add the remaining left orders.
 
-
-	// var start = floor(random(order1.length - 3)) + 1;
-	// var end = floor(random(start, order2.length - 2));
-
-
 	var newOrder = [];
 
 	// add start
@@ -68,16 +63,6 @@ function crossOver(order1, order2){
 
 	// add end
 	newOrder.push(order1[order1.length-1]);
-
-
-
-	// var newOrder = order1.slice(start, end);
-
-	// for(var i = 0; i < order2.length; i++){
-	// 	if(!newOrder.includes(order2[i])){
-	// 		newOrder.push(order2[i]);
-	// 	}
-	// }
 
 	return newOrder;
 }
