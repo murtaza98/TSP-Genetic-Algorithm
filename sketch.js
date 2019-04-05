@@ -1,5 +1,5 @@
 var cities = [];
-var totalCities = 15;
+var totalCities = 10;
 
 var order = [];
 
